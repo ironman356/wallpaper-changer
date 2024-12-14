@@ -23,7 +23,7 @@ Requirements
 
 Install required libraries:
 
-pip install requests pillow
+```pip install requests pillow```
 How It Works
 
     Detects all connected monitors and their resolutions.
@@ -34,14 +34,14 @@ How It Works
 Installation
 
     Clone the repository:
-
+```
 git clone https://github.com/<your-username>/wallpaper-changer.git
 cd wallpaper-changer
-
-    Install dependencies:
-
+```
+Install dependencies:
+```
 pip install -r requirements.txt
-
+```
     Configure the script:
         Save the script as wallpaper_changer.py.
 
@@ -49,8 +49,13 @@ Usage
 Run Manually
 
 Execute the script directly:
-
+```
 python wallpaper_changer.py
+```
+or 
+```
+py wallpaper_changer.py
+```
 Automate with Task Scheduler
 
 To run the script every 30 minutes and at startup:
