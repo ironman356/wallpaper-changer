@@ -24,6 +24,9 @@ Requirements
 Install required libraries:
 
 ```pip install requests pillow```
+
+
+
 How It Works
 
     Detects all connected monitors and their resolutions.
@@ -33,12 +36,15 @@ How It Works
 
 Installation
 
-    Clone the repository:
+Clone the repository:
+
 ```
 git clone https://github.com/<your-username>/wallpaper-changer.git
 cd wallpaper-changer
 ```
+
 Install dependencies:
+
 ```
 pip install -r requirements.txt
 ```
@@ -46,44 +52,51 @@ pip install -r requirements.txt
         Save the script as wallpaper_changer.py.
 
 Usage
+
 Run Manually
 
 Execute the script directly:
+
 ```
 python wallpaper_changer.py
 ```
+
 or 
+
 ```
 py wallpaper_changer.py
 ```
+
+
 Automate with Task Scheduler
+
 
 To run the script every 30 minutes and at startup:
 
-    Create a .bat file to execute the script:
+Create a .bat file to execute the script:
 
 @echo off
 python "C:\path\to\wallpaper_changer.py"
 
-    Add the .bat file to Windows Task Scheduler:
-        Set triggers for startup and a 30-minute interval.
-        Use the "Run only when user is logged on" option.
+Add the .bat file to Windows Task Scheduler:
+    Set triggers for startup and a 30-minute interval.
+    Use the "Run only when user is logged on" option.
 
 Customization
 
-    Change Image Source:
-        Modify the fetch_image_from_web function to use a different image source (e.g., Wikimedia Commons, Unsplash, or a local folder).
-    Adjust Execution Interval:
-        Change the interval in Task Scheduler to your preferred frequency.
+Change Image Source:
+    Modify the fetch_image_from_web function to use a different image source (e.g., Wikimedia Commons, Unsplash, or a local folder).
+Adjust Execution Interval:
+    Change the interval in Task Scheduler to your preferred frequency.
 
 Troubleshooting
 
-    Wallpaper Not Aligning:
-        Ensure your display settings are set to "Span" under Background options.
-        Verify monitor resolutions in the get_display_info() output.
+Wallpaper Not Aligning:
+    Ensure your display settings are set to "Span" under Background options.
+    Verify monitor resolutions in the get_display_info() output.
 
-    Task Scheduler Issues:
-        Use the "Run only when user is logged on" setting if you don’t have a password.
+Task Scheduler Issues:
+    Use the "Run only when user is logged on" setting if you don’t have a password.
 
 License
 
