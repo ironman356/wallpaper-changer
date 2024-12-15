@@ -43,14 +43,6 @@ git clone https://github.com/<your-username>/wallpaper-changer.git
 cd wallpaper-changer
 ```
 
-Install dependencies:
-
-```
-pip install -r requirements.txt
-```
-    Configure the script:
-        Save the script as wallpaper_changer.py.
-
 Usage
 
 Run Manually
