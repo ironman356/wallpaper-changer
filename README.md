@@ -25,7 +25,9 @@ Install required libraries:
 
 ```pip install requests pillow```
 
+or if windows
 
+```py -m pip install requests pillow```
 
 How It Works
 
@@ -53,7 +55,7 @@ Execute the script directly:
 python wallpaper_changer.py
 ```
 
-or 
+or if windows 
 
 ```
 py wallpaper_changer.py
