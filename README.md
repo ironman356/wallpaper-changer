@@ -77,9 +77,11 @@ Create a .bat file to execute the script:
 
 @echo off
 python "C:\path\to\wallpaper_changer.py"
+or
+py "C:\path\to\wallpaper_changer.py"
 
 Add the .bat file to Windows Task Scheduler:
-    Set triggers for startup and a 30-minute interval.
+    Set triggers for on login and repeat 30-minutes indefinitely.
     Use the "Run only when user is logged on" option.
 
 Customization
