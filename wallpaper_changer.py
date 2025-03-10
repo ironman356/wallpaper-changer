@@ -1,8 +1,8 @@
 import os
 import ctypes
-import requests
 from PIL import Image
 from io import BytesIO
+import random
 
 # Define RECT structure
 class RECT(ctypes.Structure):
@@ -52,25 +52,6 @@ def get_display_info():
     user32.EnumDisplayMonitors(0, 0, MonitorEnumProc(monitor_enum_proc), 0)
     return monitors
 
-def fetch_image_from_web(width, height):
-    """Fetch a random image URL from Lorem Picsum."""
-    return f"https://picsum.photos/{width}/{height}"
-
-def fetch_images_for_displays(resolutions):
-    """Fetch a unique image URL for each display."""
-    images = []
-    for width, height in resolutions:
-        image_url = fetch_image_from_web(width, height)
-        images.append(image_url)
-    return images
-
-def download_image(image_url):
-    """Download the image from the given URL."""
-    response = requests.get(image_url)
-    if response.status_code != 200:
-        raise Exception(f"Failed to download image: {image_url}")
-    return Image.open(BytesIO(response.content))
-
 def create_composite_wallpaper(image_paths, monitor_info):
     """Combine individual images into a single composite wallpaper."""
     # Calculate the virtual screen dimensions
@@ -115,21 +96,32 @@ def main():
     resolutions = [monitor["resolution"] for monitor in monitors]
     print(f"Resolutions: {resolutions}")
 
-    print("Fetching random images for displays...")
-    image_urls = fetch_images_for_displays(resolutions)
-    print(f"Image URLs: {image_urls}")
+    print("Dividing wallpapers into landscape & portrait...")
+    landscape = []
+    portrait = []
+    wallpapers_loc = os.path.join(os.getcwd(), 'imgs')
+    wallpapers = os.listdir(wallpapers_loc)
+    for i in wallpapers:
+        img_path = os.path.join(wallpapers_loc, i)
+        with Image.open(img_path) as img:
+            width, height = img.size
+            if width >= height:
+                landscape.append(img_path)
+            else:
+                portrait.append(img_path)
 
-    print("Downloading and saving images...")
+    print("Matching wallpapers to corresponding monitors...")
     image_paths = []
-    for i, image_url in enumerate(image_urls):
-        image = download_image(image_url)
-        if image.mode != 'RGB':
-            image = image.convert('RGB')
+    for i, res in enumerate(resolutions):
+        width, height = res
+        if width >= height:
+            img = random.choice(landscape)
+            landscape.remove(img)
+        else:
+            img = random.choice(portrait)
+            portrait.remove(img)
+        image_paths.append(img)
 
-        # Save each image to a temporary path
-        image_path = os.path.join(os.getenv('TEMP'), f'wallpaper_{i}.jpg')
-        image.save(image_path, 'JPEG')
-        image_paths.append(image_path)
 
     print("Creating composite wallpaper...")
     composite_path = create_composite_wallpaper(image_paths, monitors)

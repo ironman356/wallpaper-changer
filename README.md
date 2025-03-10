@@ -8,7 +8,7 @@ Features
         Creates a composite wallpaper that aligns perfectly across all displays.
 
     Random Wallpapers:
-        Fetches high-quality random images from Lorem Picsum.
+        Fetches images locally preventing duplicates.
 
     Automated Execution:
         Can be scheduled to run at startup and every 30 minutes using Task Scheduler.
