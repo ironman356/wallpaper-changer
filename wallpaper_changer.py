@@ -114,7 +114,8 @@ def main():
     print("Dividing wallpapers into landscape & portrait...")
     landscape = []
     portrait = []
-    wallpapers_loc = os.path.join(os.getcwd(), 'imgs')
+    script_dir = os.path.dirname(os.path.abspath(__file__)) # using cwd doesn't work when running from startup
+    wallpapers_loc = os.path.join(script_dir, 'imgs')
     wallpapers = os.listdir(wallpapers_loc)
     for i in wallpapers:
         img_path = os.path.join(wallpapers_loc, i)
