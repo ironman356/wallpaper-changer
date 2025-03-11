@@ -69,11 +69,26 @@ def create_composite_wallpaper(image_paths, monitor_info):
     # Place each monitor's image at the correct position
     for img_path, monitor in zip(image_paths, monitor_info):
         img = Image.open(img_path)
-        width, height = monitor["resolution"]
+        monitor_width, monitor_height = monitor["resolution"]
         left, top, _, _ = monitor["position"]
 
+
+        # Crop the image to prevent uneven stretching
+        img_width, img_height = img.size
+        monitor_aspect = monitor_width / monitor_height
+        if img_width / img_height > monitor_aspect:
+            # img is too wide
+            new_width = int(img_height * monitor_aspect)
+            starting_x = (img_width - new_width) // 2
+            img = img.crop((starting_x, 0, starting_x+new_width, img_height))
+        else:
+            # img is too tall
+            new_height = int(img_width / monitor_aspect)
+            starting_y = (img_height - new_height) // 2
+            img = img.crop((0, starting_y, img_width, starting_y+new_height))
+
         # Resize the image to fit the monitor
-        img = img.resize((width, height), Image.LANCZOS)
+        img = img.resize((monitor_width, monitor_height), Image.LANCZOS)
 
         # Paste the image at its correct position
         composite.paste(img, (left - min_left, top - min_top))
